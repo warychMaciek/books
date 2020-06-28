@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Book reviews{% endblock %}
+
+{% block body %} 
+<div class="container">
+    <h2>{{ title }}</h2>
+    <h3>by {{ author }}</h3>
+    <p>Published in {{ year }}</p>
+    <p>ISBN number: {{ number }}</p>
+    <p>Goodreads rating: {{ gr_rating }} (rated by {{ number_of_ratings }} people)</p>
+</div>
+<div class="container">
+    {% if reviewed_already %}
+        <h3>Thank you for your opinion.</h3>
+    {% else %}
+        <h3>Add a review of {{ title }}</h3>
+        <form action="{{ url_for('add_review', type = number) }}" method="post">
+            <textarea class="review-input" name="review" placeholder="Write your review..." maxlength="500" minlength="15"></textarea>
+            <p>Your rating:</p>
+            <input class="rating" type="radio" id="1" name="rating" value="1">
+            <label class="rating-label" for="1">1</label>
+            <input class="rating" type="radio" id="2" name="rating" value="2">
+            <label class="rating-label" for="2">2</label>
+            <input class="rating" type="radio" id="3" name="rating" value="3">
+            <label class="rating-label" for="3">3</label>
+            <input class="rating" type="radio" id="4" name="rating" value="4">
+            <label class="rating-label" for="4">4</label>
+            <input class="rating" type="radio" id="5" name="rating" value="5">
+            <label class="rating-label" for="5">5</label>
+            <button>Add</button>
+        </form>
+    {% endif %}
+</div>
+<div class="container">
+    {% if has_reviews %}
+        <h3>Reviews:</h3>
+        <ul>
+            {% for review in reviews %}
+                <li class="review">
+                    <p>Rating: {{ review.rating }}</p>
+                    <p>{{ review.review }}</p>
+                    <p>by {{ review.username }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>{{title}} has no reviews yet.</h3>
+    {% endif %}
+    
+</div>
+{% endblock %}

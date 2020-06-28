@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock %}
+{% block user_info %}{% endblock %}
+{% block body %}
+<div class="container">
+    <p>If you do not have account already, just sign up to be able to use the website.</p>
+    <form action="{{ url_for('registered') }}" method="post">
+        <input type="text" name="login" placeholder="Login">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password-repeat" placeholder="Confirm password">
+        <button>Sign up</button>
+    </form>
+    {{ alert }}
+</div>
+{% endblock %}

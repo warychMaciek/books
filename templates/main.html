@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Book reviews{% endblock %}
+
+{% block body %} 
+<div class="container">
+    <h2>Hello {{ login }}</h2>
+    <p>{{ greetings }}</p>
+    <form action="{{ url_for('results') }}" method="post">
+        <label>Find the book</label>
+        <input type="text" name="book" placeholder="Title, author, ISBN">
+        <button>Search</button> 
+    </form>
+</div>
+{% endblock %}
